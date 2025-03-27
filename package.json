@@ -1,0 +1,25 @@
+{
+  "name": "vtl-syntax",
+  "displayName": "vtl-syntax",
+  "description": "Velocity Template Engine Syntax Support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.98.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "vtl",
+      "aliases": ["Velocity Template Engine", "vtl"],
+      "extensions": [".vm"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "vtl",
+      "scopeName": "",
+      "path": "./syntaxes/vtl.tmLanguage.json"
+    }]
+  }
+}
