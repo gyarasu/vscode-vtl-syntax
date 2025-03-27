@@ -1,32 +1,32 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Velocity Template Engine",
+	"name": "velocity",
+	"fileTypes": ["vm"],
+	"scopeName": "text.velocity",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.vtl",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.vtl",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.vtl",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": ""
-}
+	  {
+		"match": "#\\*.*?\\*#",
+		"name": "comment.block.velocity"
+	  },
+	  {
+		"match": "##.*$",
+		"name": "comment.line.velocity"
+	  },
+	  {
+		"match": "\\$(\\w+|!\\{[^}]+\\})",
+		"name": "variable.other.velocity"
+	  },
+	  {
+		"match": "#(if|elseif|else|end|foreach|macro|parse|include)\\b",
+		"name": "keyword.control.velocity"
+	  },
+	  {
+		"match": "\"(?:[^\"\\\\]|\\\\.)*\"",
+		"name": "string.quoted.double.velocity"
+	  },
+	  {
+		"match": "'(?:[^'\\\\]|\\\\.)*'",
+		"name": "string.quoted.single.velocity"
+	  }
+	]
+  }
+  
