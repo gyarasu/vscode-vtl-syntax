@@ -1,32 +1,106 @@
 {
-	"name": "velocity",
-	"fileTypes": ["vm"],
-	"scopeName": "text.velocity",
+	"$schema": "https://raw.githubusercontent.com/microsoft/vscode-textmate/master/test/cases/schema.json",
+	"name": "Velocity Template Language",
+	"scopeName": "text.html.velocity",
 	"patterns": [
-	  {
-		"match": "#\\*.*?\\*#",
-		"name": "comment.block.velocity"
+	  { "include": "#velocity-comments" },
+	  { "include": "#velocity-directives" },
+	  { "include": "#velocity-variables" },
+	  { "include": "#velocity-unparsed" },
+	  { "include": "text.html.basic" }
+	],
+	"repository": {
+	  "velocity-comments": {
+		"patterns": [
+		  {
+			"name": "comment.block.velocity",
+			"begin": "#\\*",
+			"end": "\\*#",
+			"beginCaptures": {
+			  "0": { "name": "punctuation.definition.comment.velocity" }
+			},
+			"endCaptures": {
+			  "0": { "name": "punctuation.definition.comment.velocity" }
+			},
+			"patterns": [
+			  {
+				"name": "comment.block.velocity",
+				"match": "."
+			  }
+			]
+		  },
+		  {
+			"name": "comment.line.velocity",
+			"match": "##.*$",
+			"captures": {
+			  "0": { "name": "punctuation.definition.comment.velocity" }
+			}
+		  }
+		]
 	  },
-	  {
-		"match": "##.*$",
-		"name": "comment.line.velocity"
+	  "velocity-directives": {
+		"patterns": [
+		  {
+			"name": "keyword.control.velocity",
+			"begin": "(?:#if|#elseif|#foreach|#macro|#define)\\b",
+			"end": "(?<=)#",
+			"patterns": []
+		  },
+		  {
+			"name": "keyword.control.velocity",
+			"match": "(?:#else\\b|#\\{else\\})"
+		  },
+		  {
+			"name": "keyword.control.velocity",
+			"match": "(?:#end\\b|#\\{end\\})"
+		  },
+		  {
+			"name": "keyword.control.velocity",
+			"match": "#(?:include|parse|evaluate|set)\\b"
+		  },
+		  {
+			"name": "keyword.control.velocity",
+			"match": "(?:#stop\\b|#\\{stop\\}|#break\\b|#\\{break\\})"
+		  },
+		  {
+			"name": "keyword.control.velocity",
+			"match": "#macro\\b"
+		  },
+		  {
+			"name": "support.function.velocity",
+			"begin": "#(?!(?:if|elseif|else|end|foreach|include|parse|evaluate|define|macro|stop|break)\\b)([A-Za-z_][A-Za-z0-9_-]*)\\s*\\(",
+			"beginCaptures": {
+			  "1": { "name": "entity.name.function.velocity" }
+			},
+			"end": "\\)",
+			"patterns": [
+			  { "include": "#velocity-variables" }
+			]
+		  }
+		]
 	  },
-	  {
-		"match": "\\$(\\w+|!\\{[^}]+\\})",
-		"name": "variable.other.velocity"
+	  "velocity-variables": {
+		"patterns": [
+		  {
+			"name": "variable.other.velocity",
+			"match": "\\$!?\\{[A-Za-z][A-Za-z0-9_-]*\\}"
+		  },
+		  {
+			"name": "variable.other.velocity",
+			"match": "\\$!?[A-Za-z][A-Za-z0-9_-]*(?:\\.[A-Za-z][A-Za-z0-9_-]*|\\([^(]*\\))*"
+		  }
+		]
 	  },
-	  {
-		"match": "#(if|elseif|else|end|foreach|macro|parse|include)\\b",
-		"name": "keyword.control.velocity"
-	  },
-	  {
-		"match": "\"(?:[^\"\\\\]|\\\\.)*\"",
-		"name": "string.quoted.double.velocity"
-	  },
-	  {
-		"match": "'(?:[^'\\\\]|\\\\.)*'",
-		"name": "string.quoted.single.velocity"
+	  "velocity-unparsed": {
+		"patterns": [
+		  {
+			"name": "meta.block.unparsed.velocity",
+			"begin": "#\\[\\[",
+			"end": "\\]\\]#"
+		  }
+		]
 	  }
-	]
+	},
+	"fileTypes": ["vm"]
   }
   
