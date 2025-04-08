@@ -11,14 +11,14 @@
   ],
   "contributes": {
     "languages": [{
-      "id": "vtl",
+      "id": "velocity",
       "aliases": ["Velocity Template Engine", "vtl"],
       "extensions": [".vm"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
-      "language": "vtl",
-      "scopeName": "",
+      "language": "velocity",
+      "scopeName": "text",
       "path": "./syntaxes/vtl.tmLanguage.json"
     }]
   }
